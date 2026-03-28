@@ -146,23 +146,28 @@
 
     .sidebar-block {
       margin-bottom: 2.5rem;
+      overflow: hidden;
     }
 
     .logo-mark {
-      width: 4.6rem;
-      height: 4.6rem;
+      width: 4.8rem;
+      aspect-ratio: 1;
       clip-path: polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%);
       overflow: hidden;
       margin-bottom: 2rem;
       box-shadow: var(--shadow);
+      background: #ddd;
     }
 
     .site-title {
       margin: 0;
       color: var(--heading);
-      font: 800 clamp(2.6rem, 4vw, 4rem)/1.35 "Raleway", sans-serif;
+      font: 800 clamp(2.6rem, 3.8vw, 4rem)/1.35 "Raleway", sans-serif;
       letter-spacing: 0.22em;
       text-transform: uppercase;
+      word-break: break-word;
+      overflow-wrap: anywhere;
+      max-width: 100%;
     }
 
     .site-tagline,
@@ -517,7 +522,7 @@
     <aside class="sidebar">
       <section class="sidebar-block">
         <div class="logo-mark">
-          <img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=400&q=80" alt="Site logo" />
+          <img src="https://images.unsplash.com/photo-1474511320723-9a56873867b5?auto=format&fit=crop&w=400&q=80" alt="Fox logo" />
         </div>
 
         <h1 class="site-title">Future<br>Imperfect</h1>
@@ -616,3 +621,4 @@
   </script>
 </body>
 </html>
+
