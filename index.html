@@ -5,146 +5,21 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-  <!-- Google Font (similar to original) -->
-  <link href="https://fonts.googleapis.com/css2?family=Source+Sans+3:wght@300;400;600&display=swap" rel="stylesheet">
-
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Source Sans 3', sans-serif;
-      background: #f5f6f7;
-      color: #3c3b3b;
-    }
-
-    a { text-decoration: none; color: inherit; }
-
-    /* Header */
-    #header {
-      position: fixed;
-      width: 100%;
-      background: white;
-      border-bottom: 1px solid #ddd;
-      display: flex;
-      justify-content: space-between;
-      padding: 1rem 2rem;
-      z-index: 1000;
-    }
-
-    #header h1 {
-      font-size: 1.2rem;
-      letter-spacing: 2px;
-    }
-
-    /* Menu */
-    #menu {
-      position: fixed;
-      left: -260px;
-      top: 0;
-      width: 260px;
-      height: 100%;
-      background: #ffffff;
-      box-shadow: 2px 0 10px rgba(0,0,0,0.1);
-      transition: 0.3s;
-      padding: 2rem;
-    }
-
-    #menu.active {
-      left: 0;
-    }
-
-    #menu ul {
-      list-style: none;
-      padding: 0;
-    }
-
-    #menu li {
-      margin: 15px 0;
-      font-weight: 600;
-    }
-
-    /* Layout */
-    #wrapper {
-      display: flex;
-      padding-top: 80px;
-      max-width: 1200px;
-      margin: auto;
-    }
-
-    #main {
-      flex: 2;
-      padding: 2rem;
-    }
-
-    #sidebar {
-      flex: 1;
-      padding: 2rem;
-    }
-
-    /* Post */
-    .post {
-      background: white;
-      margin-bottom: 2rem;
-      border: 1px solid #ddd;
-    }
-
-    .post img {
-      width: 100%;
-    }
-
-    .post header {
-      padding: 1.5rem;
-    }
-
-    .post h2 {
-      margin: 0;
-      font-size: 1.5rem;
-    }
-
-    .meta {
-      font-size: 0.8rem;
-      color: gray;
-    }
-
-    .post p {
-      padding: 0 1.5rem 1.5rem;
-      line-height: 1.6;
-    }
-
-    .button {
-      display: inline-block;
-      border: 1px solid #ddd;
-      padding: 10px 20px;
-      margin: 1rem 1.5rem;
-      font-size: 0.8rem;
-      letter-spacing: 2px;
-    }
-
-    /* Sidebar */
-    #sidebar section {
-      background: white;
-      padding: 1.5rem;
-      margin-bottom: 2rem;
-      border: 1px solid #ddd;
-    }
-
-    /* Responsive */
-    @media (max-width: 900px) {
-      #wrapper {
-        flex-direction: column;
-      }
-    }
-  </style>
+  <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
+<!-- Header -->
 <header id="header">
-  <h1>FUTURE IMPERFECT</h1>
-  <a href="#" onclick="toggleMenu()">MENU</a>
+  <h1 class="logo">Future Imperfect</h1>
+  <nav>
+    <a href="#" id="menuToggle">Menu</a>
+  </nav>
 </header>
 
+<!-- Slide Menu -->
 <nav id="menu">
-  <h3>Menu</h3>
   <ul>
     <li><a href="#">Homepage</a></li>
     <li><a href="#">Generic</a></li>
@@ -152,55 +27,56 @@
   </ul>
 </nav>
 
+<!-- Wrapper -->
 <div id="wrapper">
 
-  <!-- Main -->
-  <div id="main">
+  <!-- Main Content -->
+  <main id="main">
 
     <article class="post">
-      <img src="https://picsum.photos/900/400">
       <header>
         <h2>Magna sed adipiscing</h2>
-        <div class="meta">March 28, 2026 • Jane Doe</div>
+        <p class="meta">March 28, 2026 • Jane Doe</p>
       </header>
+
+      <img src="https://picsum.photos/900/400">
+
       <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-      <a href="#" class="button">CONTINUE READING</a>
+
+      <a href="#" class="button">Continue Reading</a>
     </article>
 
     <article class="post">
-      <img src="https://picsum.photos/900/401">
       <header>
         <h2>Ultricies sed magna euismod</h2>
-        <div class="meta">March 27, 2026 • Jane Doe</div>
+        <p class="meta">March 27, 2026 • Jane Doe</p>
       </header>
-      <p>More sample content just like the original template.</p>
-      <a href="#" class="button">CONTINUE READING</a>
+
+      <img src="https://picsum.photos/900/401">
+
+      <p>More example content.</p>
+
+      <a href="#" class="button">Continue Reading</a>
     </article>
 
-  </div>
+  </main>
 
   <!-- Sidebar -->
-  <div id="sidebar">
-
+  <aside id="sidebar">
     <section>
       <h2>Future Imperfect</h2>
-      <p>A modern blog layout.</p>
+      <p>A modern blog layout</p>
     </section>
 
     <section>
       <h3>Mini Posts</h3>
-      <p>Small preview posts go here.</p>
+      <p>Sidebar content here</p>
     </section>
-
-  </div>
+  </aside>
 
 </div>
 
-<script>
-function toggleMenu() {
-  document.getElementById("menu").classList.toggle("active");
-}
-</script>
+<script src="script.js"></script>
 
 </body>
 </html>
