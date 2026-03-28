@@ -1,1 +1,90 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f5f6f7;
+  color: #3c3b3b;
+}
 
+/* Header */
+#header {
+  position: fixed;
+  width: 100%;
+  background: white;
+  border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 2rem;
+  z-index: 1000;
+}
+
+/* Menu */
+#menu {
+  position: fixed;
+  left: -250px;
+  top: 0;
+  width: 250px;
+  height: 100%;
+  background: white;
+  transition: 0.3s;
+  padding: 20px;
+}
+
+#menu.active {
+  left: 0;
+}
+
+/* Layout */
+#wrapper {
+  display: flex;
+  max-width: 1200px;
+  margin: auto;
+  padding-top: 80px;
+}
+
+#main {
+  flex: 2;
+  padding: 2rem;
+}
+
+#sidebar {
+  flex: 1;
+  padding: 2rem;
+}
+
+/* Post */
+.post {
+  background: white;
+  border: 1px solid #ddd;
+  margin-bottom: 2rem;
+}
+
+.post img {
+  width: 100%;
+}
+
+.post header {
+  padding: 1rem;
+}
+
+.meta {
+  color: gray;
+  font-size: 0.8rem;
+}
+
+.post p {
+  padding: 1rem;
+}
+
+.button {
+  display: inline-block;
+  border: 1px solid #ddd;
+  margin: 1rem;
+  padding: 10px;
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  #wrapper {
+    flex-direction: column;
+  }
+}
