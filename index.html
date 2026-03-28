@@ -3,63 +3,616 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Future Blog UI</title>
-  <link rel="stylesheet" href="assets/style.css" />
+  <title>Future Imperfect Clone</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Raleway:wght@400;500;700;800&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f4f4f4;
+      --surface: #ffffff;
+      --line: #e4e4e4;
+      --text: #3c3b3b;
+      --muted: #8c8c8c;
+      --heading: #2f3441;
+      --accent: #2ebaae;
+      --shadow: 0 1px 0 rgba(0,0,0,.03);
+      --spacing: 2.5rem;
+      --max: 1440px;
+    }
+
+    * { box-sizing: border-box; }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: "Source Sans 3", sans-serif;
+      line-height: 1.7;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .caps {
+      font-family: "Raleway", sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.25em;
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255,255,255,.97);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--line);
+      display: flex;
+      align-items: center;
+      min-height: 4.2rem;
+    }
+
+    .brand {
+      padding: 0 1.6rem;
+      border-right: 1px solid var(--line);
+      font: 800 1rem/1 "Raleway", sans-serif;
+      letter-spacing: 0.28em;
+      color: var(--heading);
+      white-space: nowrap;
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      flex: 1;
+      min-width: 0;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      min-width: 0;
+      overflow-x: auto;
+      scrollbar-width: none;
+    }
+
+    .nav-links::-webkit-scrollbar { display: none; }
+
+    .nav-links a {
+      padding: 0 1.55rem;
+      color: var(--muted);
+      font: 500 0.82rem/4.2rem "Raleway", sans-serif;
+      letter-spacing: 0.28em;
+      white-space: nowrap;
+      border-right: 1px solid var(--line);
+      transition: color .25s ease, background .25s ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a.active {
+      color: var(--heading);
+      background: rgba(0,0,0,.02);
+    }
+
+    .nav-icons {
+      display: flex;
+      margin-left: auto;
+      border-left: 1px solid var(--line);
+    }
+
+    .icon-btn {
+      width: 4.2rem;
+      height: 4.2rem;
+      display: grid;
+      place-items: center;
+      color: #9d9d9d;
+      border-left: 1px solid var(--line);
+      background: transparent;
+      cursor: pointer;
+      transition: color .25s ease, background .25s ease;
+      font-size: 1.2rem;
+    }
+
+    .icon-btn:hover {
+      color: var(--heading);
+      background: rgba(0,0,0,.02);
+    }
+
+    .layout {
+      width: min(calc(100% - 3rem), var(--max));
+      margin: 2.8rem auto;
+      display: grid;
+      grid-template-columns: 23rem minmax(0, 1fr);
+      gap: 3.2rem;
+      align-items: start;
+    }
+
+    .sidebar {
+      position: sticky;
+      top: 6rem;
+    }
+
+    .sidebar-block {
+      margin-bottom: 2.5rem;
+    }
+
+    .logo-mark {
+      width: 4.6rem;
+      height: 4.6rem;
+      clip-path: polygon(25% 6.7%, 75% 6.7%, 100% 50%, 75% 93.3%, 25% 93.3%, 0% 50%);
+      overflow: hidden;
+      margin-bottom: 2rem;
+      box-shadow: var(--shadow);
+    }
+
+    .site-title {
+      margin: 0;
+      color: var(--heading);
+      font: 800 clamp(2.6rem, 4vw, 4rem)/1.35 "Raleway", sans-serif;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .site-tagline,
+    .site-credit {
+      margin: 1.7rem 0 0;
+      font: 500 1rem/1.9 "Raleway", sans-serif;
+      letter-spacing: 0.23em;
+      text-transform: uppercase;
+      color: #767676;
+    }
+
+    .site-credit a {
+      text-decoration: underline;
+      text-underline-offset: 0.18em;
+    }
+
+    .divider {
+      height: 1px;
+      background: var(--line);
+      margin: 2.7rem 0;
+    }
+
+    .mini-post {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-bottom: 1.6rem;
+    }
+
+    .mini-post-content {
+      padding: 1.25rem 1.35rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .mini-post h3 {
+      margin: 0;
+      font: 800 0.95rem/1.55 "Raleway", sans-serif;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--heading);
+    }
+
+    .mini-post-meta {
+      margin-top: 0.35rem;
+      color: var(--muted);
+      font: 500 0.7rem/1.6 "Raleway", sans-serif;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .avatar {
+      width: 2.9rem;
+      height: 2.9rem;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+
+    .post {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      margin-bottom: 3rem;
+      overflow: hidden;
+    }
+
+    .post-header {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 18rem;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .post-header-main {
+      padding: 4rem 3.4rem 3rem;
+      border-right: 1px solid var(--line);
+    }
+
+    .post-title {
+      margin: 0 0 1rem;
+      color: var(--heading);
+      font: 800 clamp(1.8rem, 2.2vw, 2.7rem)/1.35 "Raleway", sans-serif;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+    }
+
+    .post-subtitle {
+      margin: 0;
+      color: #868686;
+      font: 500 0.92rem/1.9 "Raleway", sans-serif;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+    }
+
+    .post-meta {
+      padding: 3.8rem 2.4rem;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      justify-content: center;
+      gap: 1.4rem;
+      text-align: right;
+    }
+
+    .post-date {
+      color: var(--heading);
+      font: 800 0.9rem/1.5 "Raleway", sans-serif;
+      letter-spacing: 0.26em;
+      text-transform: uppercase;
+    }
+
+    .author {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      color: #8d8d8d;
+      font: 500 0.75rem/1.3 "Raleway", sans-serif;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+    }
+
+    .post-body {
+      padding: 3.4rem;
+    }
+
+    .featured-image {
+      width: 100%;
+      aspect-ratio: 16 / 7;
+      object-fit: cover;
+      margin-bottom: 2.4rem;
+      transition: transform .55s ease, filter .35s ease;
+      filter: saturate(.94);
+    }
+
+    .image-frame {
+      overflow: hidden;
+      background: #ddd;
+    }
+
+    .image-frame:hover .featured-image {
+      transform: scale(1.04);
+      filter: saturate(1);
+    }
+
+    .post-text {
+      max-width: 58rem;
+      color: #666;
+      font-size: 1.08rem;
+    }
+
+    .post-actions {
+      margin-top: 2.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 3.4rem;
+      padding: 0 1.8rem;
+      border: 1px solid var(--line);
+      background: var(--surface);
+      color: var(--heading);
+      font: 800 0.8rem/1 "Raleway", sans-serif;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      transition: border-color .25s ease, color .25s ease, transform .2s ease, background .25s ease;
+    }
+
+    .button:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      transform: translateY(-1px);
+      background: rgba(46, 186, 174, 0.03);
+    }
+
+    .post-stats {
+      display: flex;
+      gap: 1.5rem;
+      color: #9a9a9a;
+      font: 500 0.76rem/1.4 "Raleway", sans-serif;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      flex-wrap: wrap;
+    }
+
+    .floating-search {
+      position: fixed;
+      top: 5.5rem;
+      right: 1.5rem;
+      width: min(26rem, calc(100vw - 2rem));
+      padding: 1rem;
+      background: rgba(255,255,255,.98);
+      border: 1px solid var(--line);
+      box-shadow: 0 18px 38px rgba(0,0,0,.08);
+      transform: translateY(-10px);
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease, transform .25s ease;
+      z-index: 1200;
+    }
+
+    .floating-search.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .floating-search input {
+      width: 100%;
+      padding: 0.95rem 1rem;
+      border: 1px solid var(--line);
+      outline: none;
+      font: 600 0.95rem/1.2 "Source Sans 3", sans-serif;
+    }
+
+    .floating-search input:focus {
+      border-color: var(--accent);
+    }
+
+    @media (max-width: 1280px) {
+      .layout {
+        grid-template-columns: 20rem minmax(0, 1fr);
+        gap: 2rem;
+      }
+
+      .post-header {
+        grid-template-columns: minmax(0, 1fr) 15rem;
+      }
+
+      .post-header-main,
+      .post-body {
+        padding-left: 2.3rem;
+        padding-right: 2.3rem;
+      }
+    }
+
+    @media (max-width: 980px) {
+      .layout {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        position: static;
+        order: 2;
+      }
+
+      .content {
+        order: 1;
+      }
+
+      .post-header {
+        grid-template-columns: 1fr;
+      }
+
+      .post-header-main {
+        border-right: 0;
+      }
+
+      .post-meta {
+        border-top: 1px solid var(--line);
+        padding: 1.8rem 2.3rem;
+        align-items: flex-start;
+        text-align: left;
+      }
+
+      .author {
+        flex-direction: row-reverse;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .topbar {
+        min-height: 3.8rem;
+      }
+
+      .brand {
+        font-size: 0.8rem;
+        padding: 0 1rem;
+      }
+
+      .nav-links a {
+        padding: 0 1rem;
+        line-height: 3.8rem;
+        font-size: 0.72rem;
+      }
+
+      .icon-btn {
+        width: 3.8rem;
+        height: 3.8rem;
+      }
+
+      .layout {
+        width: min(calc(100% - 1.2rem), var(--max));
+        margin: 1rem auto 2rem;
+        gap: 1.5rem;
+      }
+
+      .site-title {
+        font-size: 2.2rem;
+      }
+
+      .post-header-main,
+      .post-body,
+      .post-meta {
+        padding: 1.4rem;
+      }
+
+      .featured-image {
+        aspect-ratio: 16 / 10;
+        margin-bottom: 1.3rem;
+      }
+
+      .post-actions {
+        align-items: stretch;
+      }
+    }
+  </style>
 </head>
 <body>
+  <header class="topbar">
+    <a href="#" class="brand">Future Imperfect</a>
 
-<header class="navbar" id="navbar">
-  <div class="logo">FutureBlog</div>
-  <nav>
-    <a href="#home">Home</a>
-    <a href="#posts">Posts</a>
-    <a href="#about">About</a>
-    <button class="btn-primary">Subscribe</button>
-  </nav>
-</header>
+    <div class="nav">
+      <nav class="nav-links" aria-label="Primary navigation">
+        <a href="#" class="active">Lorem</a>
+        <a href="#">Ipsum</a>
+        <a href="#">Feugiat</a>
+        <a href="#">Tempus</a>
+        <a href="#">Adipiscing</a>
+      </nav>
 
-<section class="hero" id="home">
-  <div class="hero-content">
-    <h1>Build the Future of Content</h1>
-    <p>Modern UI. Smooth animations. Clean layout.</p>
-    <button class="btn-glow">Explore Posts</button>
+      <div class="nav-icons">
+        <button class="icon-btn" id="searchToggle" aria-label="Open search">⌕</button>
+        <button class="icon-btn" aria-label="Open menu">☰</button>
+      </div>
+    </div>
+  </header>
+
+  <div class="floating-search" id="searchPanel">
+    <input type="text" placeholder="Search" aria-label="Search" />
   </div>
-</section>
 
-<section class="posts" id="posts">
-  <h2>Latest Articles</h2>
-  <div class="grid">
+  <main class="layout">
+    <aside class="sidebar">
+      <section class="sidebar-block">
+        <div class="logo-mark">
+          <img src="https://images.unsplash.com/photo-1518791841217-8f162f1e1131?auto=format&fit=crop&w=400&q=80" alt="Site logo" />
+        </div>
 
-    <article class="card">
-      <h3>AI & Design</h3>
-      <p>Explore how AI is reshaping modern interfaces.</p>
-      <button>Read</button>
-    </article>
+        <h1 class="site-title">Future<br>Imperfect</h1>
+        <p class="site-tagline">Another fine responsive site</p>
+        <p class="site-credit">Template by <a href="https://html5up.net/future-imperfect" target="_blank" rel="noopener noreferrer">HTML5 UP</a></p>
+      </section>
 
-    <article class="card">
-      <h3>UI Motion</h3>
-      <p>Micro-interactions that make interfaces feel alive.</p>
-      <button>Read</button>
-    </article>
+      <div class="divider"></div>
 
-    <article class="card">
-      <h3>CSS Future</h3>
-      <p>Modern CSS techniques for better layouts.</p>
-      <button>Read</button>
-    </article>
+      <article class="mini-post">
+        <img src="https://images.unsplash.com/photo-1517048676732-d65bc937f952?auto=format&fit=crop&w=900&q=80" alt="Desk details" />
+        <div class="mini-post-content">
+          <div>
+            <h3>Vitae sed condimentum</h3>
+            <div class="mini-post-meta">October 20, 2015</div>
+          </div>
+          <img class="avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80" alt="Author avatar" />
+        </div>
+      </article>
 
-  </div>
-</section>
+      <article class="mini-post">
+        <img src="https://images.unsplash.com/photo-1497366754035-f200968a6e72?auto=format&fit=crop&w=900&q=80" alt="Workspace" />
+        <div class="mini-post-content">
+          <div>
+            <h3>Rutrum neque accumsan</h3>
+            <div class="mini-post-meta">October 19, 2015</div>
+          </div>
+          <img class="avatar" src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?auto=format&fit=crop&w=200&q=80" alt="Author avatar" />
+        </div>
+      </article>
+    </aside>
 
-<section class="about">
-  <h2>About</h2>
-  <p>A minimal futuristic blog layout focused on readability and motion design.</p>
-</section>
+    <section class="content">
+      <article class="post">
+        <header class="post-header">
+          <div class="post-header-main">
+            <h2 class="post-title">Magna sed adipiscing</h2>
+            <p class="post-subtitle">Lorem ipsum dolor amet nullam consequat etiam feugiat</p>
+          </div>
 
-<footer>
-  <p>© 2026 FutureBlog</p>
-</footer>
+          <div class="post-meta">
+            <div class="post-date">November 1, 2015</div>
+            <div class="author">
+              <span>Jane Doe</span>
+              <img class="avatar" src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=200&q=80" alt="Jane Doe" />
+            </div>
+          </div>
+        </header>
 
-<script src="assets/script.js"></script>
+        <div class="post-body">
+          <div class="image-frame">
+            <img class="featured-image" src="https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80" alt="Featured landscape" />
+          </div>
+
+          <div class="post-text">
+            <p>
+              This rebuild matches the overall look of the HTML5 UP <strong>Future Imperfect</strong> homepage:
+              the split layout, the uppercase Raleway headings, the thin borders, the sidebar branding,
+              and the card-based blog post design. Replace the image URLs and text with your own content,
+              or duplicate the main article block for more posts.
+            </p>
+          </div>
+
+          <div class="post-actions">
+            <a class="button" href="#">Continue Reading</a>
+            <div class="post-stats">
+              <span>General</span>
+              <span>28 Comments</span>
+            </div>
+          </div>
+        </div>
+      </article>
+    </section>
+  </main>
+
+  <script>
+    const searchToggle = document.getElementById('searchToggle');
+    const searchPanel = document.getElementById('searchPanel');
+
+    searchToggle.addEventListener('click', () => {
+      const isOpen = searchPanel.classList.toggle('open');
+      searchToggle.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+      if (isOpen) {
+        const input = searchPanel.querySelector('input');
+        setTimeout(() => input.focus(), 50);
+      }
+    });
+
+    document.addEventListener('click', (event) => {
+      const clickedInside = searchPanel.contains(event.target) || searchToggle.contains(event.target);
+      if (!clickedInside) {
+        searchPanel.classList.remove('open');
+        searchToggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  </script>
 </body>
 </html>
