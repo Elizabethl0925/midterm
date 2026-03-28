@@ -1,22 +1,6 @@
-// Navbar shrink on scroll
 window.addEventListener("scroll", () => {
-  const navbar = document.getElementById("navbar");
-  navbar.classList.toggle("shrink", window.scrollY > 50);
+  const nav = document.getElementById("navbar");
+  nav.style.background = window.scrollY > 50
+    ? "rgba(10,12,18,0.95)"
+    : "rgba(10,12,18,0.7)";
 });
-
-// Scroll reveal animation
-const reveals = document.querySelectorAll(".reveal");
-
-function revealOnScroll() {
-  const windowHeight = window.innerHeight;
-
-  reveals.forEach(el => {
-    const top = el.getBoundingClientRect().top;
-    if (top < windowHeight - 100) {
-      el.classList.add("active");
-    }
-  });
-}
-
-window.addEventListener("scroll", revealOnScroll);
-revealOnScroll();
