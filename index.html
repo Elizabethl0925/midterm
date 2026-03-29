@@ -149,25 +149,27 @@
       overflow: hidden;
     }
 
+/* Container for the hexagon logo */
 .logo-mark {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  width: 4.8rem;
-  height: 4.8rem; /* 🔥 force perfect square */
-  overflow: hidden;
-  margin-bottom: 2rem;
-  box-shadow: var(--shadow);
-  background: #ddd;
+    width: 150px;          /* Adjust size as needed */
+    aspect-ratio: 1 / 1;   /* Keeps it square for perfect hexagon */
+    clip-path: polygon(
+        25% 6.7%, 75% 6.7%, 100% 50%, 
+        75% 93.3%, 25% 93.3%, 0% 50%
+    ); /* Perfect hexagon */
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff; /* Optional background */
+    margin: 0 auto;         /* Center horizontally */
+}
 
-  clip-path: polygon(
-    50% 0%,
-    100% 25%,
-    100% 75%,
-    50% 100%,
-    0% 75%,
-    0% 25%
-  );
+/* Image inside hexagon */
+.logo-mark img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;      /* Prevents squishing */
 }
 
     .site-title {
