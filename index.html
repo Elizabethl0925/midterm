@@ -151,37 +151,16 @@
 
 /* Container for the hexagon logo */
 .logo-mark {
-    width: 150px;          /* Adjust size as needed */
-    aspect-ratio: 1 / 1;   /* Keeps it square for perfect hexagon */
-    clip-path: polygon(
-        25% 6.7%, 75% 6.7%, 100% 50%, 
-        75% 93.3%, 25% 93.3%, 0% 50%
-    ); /* Perfect hexagon */
+    width: 80px; /* Smaller size to match the original */
+    aspect-ratio: 1 / 1;
+    /* This new polygon flips the points to the top and bottom */
+    clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
     overflow: hidden;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #fff; /* Optional background */
-    margin: 0 auto;         /* Center horizontally */
+    margin-bottom: 1.5rem; /* Adds space between fox and "FUTURE" */
 }
-
-/* Image inside hexagon */
-.logo-mark img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;      /* Prevents squishing */
-}
-
-    .site-title {
-      margin: 0;
-      color: var(--heading);
-      font: 800 clamp(2rem, 3vw, 3rem)/1.35 "Raleway", sans-serif;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      word-break: break-word;
-      overflow-wrap: anywhere;
-      max-width: 100%;
-    }
 
     .site-tagline,
     .site-credit {
@@ -191,6 +170,18 @@
       text-transform: uppercase;
       color: #767676;
     }
+    
+    .site-title {
+    font-family: "Raleway", sans-serif;
+    font-weight: 800;
+    font-size: 2.25rem;
+    line-height: 1;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: #3c3b3b; /* Or keep your var(--heading) */
+    margin: 0 0 0.5rem 0;
+    display: block;
+}
 
     .site-credit a {
       text-decoration: underline;
@@ -486,24 +477,17 @@
         gap: 1.5rem;
       }
 
-      .site-title {
-        font-size: 2.2rem;
-      }
-
-      .post-header-main,
-      .post-body,
-      .post-meta {
-        padding: 1.4rem;
-      }
-
-      .featured-image {
-        aspect-ratio: 16 / 10;
-        margin-bottom: 1.3rem;
-      }
-
-      .post-actions {
-        align-items: stretch;
-      }
+     .site-title {
+    display: block;
+    font-family: "Raleway", sans-serif;
+    font-weight: 800;
+    font-size: 2.25rem;
+    line-height: 1.2;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--heading);
+    margin: 0 0 1rem 0;
+}
     }
   </style>
 </head>
